@@ -1,0 +1,14 @@
+{
+  "name": "menumate-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.1.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "turbo": "latest"
+  }
+}
