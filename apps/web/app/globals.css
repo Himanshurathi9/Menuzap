@@ -4,82 +4,76 @@
 
 @layer base {
   :root {
-    /* Base theme: Dark Mode Luxury */
-    --background: #0A0A0E; /* Obsidian Dark */
-    --foreground: #F4F4F5; /* Vapor White */
-    
-    /* Core UI Elements */
+    --background: #0A0A0E;
+    --foreground: #F4F4F5;
     --card: #121218;
     --card-foreground: #F4F4F5;
-    
     --popover: #121218;
     --popover-foreground: #F4F4F5;
-    
-    /* Primary Accent: Amethyst Purple */
     --primary: #9333EA;
     --primary-foreground: #FFFFFF;
-    
     --secondary: #1A1A24;
     --secondary-foreground: #F4F4F5;
-    
     --muted: #1A1A24;
     --muted-foreground: #A1A1AA;
-    
     --accent: #1A1A24;
     --accent-foreground: #F4F4F5;
-    
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
-
-    /* Borders & Inputs */
     --border: #27272A;
     --input: #27272A;
-    --ring: rgba(147, 51, 234, 0.5); /* Amethyst glow on focus */
-
-    /* Border Radius for a sleek, modern look */
+    --ring: rgba(147, 51, 234, 0.5);
     --radius: 0.75rem;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
+  * { @apply border-border; }
   body {
     @apply bg-background text-foreground antialiased selection:bg-amethyst selection:text-white;
-    /* Subtly textured background for that premium vibe */
-    background-image: radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.05) 0%, transparent 70%);
+    background-image: radial-gradient(circle at 50% 0%, rgba(147,51,234,0.05) 0%, transparent 70%);
     background-attachment: fixed;
+    overflow-x: hidden;
   }
-  
-  /* Smooth scrolling across the entire app */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Custom Scrollbar for desktop */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--background);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #27272A;
-    border-radius: var(--radius);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-  }
+  html { scroll-behavior: smooth; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--background); }
+  ::-webkit-scrollbar-thumb { background: #27272a; border-radius: var(--radius); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 4px; }
 }
 
-/* Glassmorphism Utilities */
 @layer utilities {
   .glass-panel {
-    @apply bg-card/60 backdrop-blur-md border border-white/5 shadow-glass;
+    background: rgba(18, 18, 24, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   }
-  
-  .text-glow {
-    text-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+  .text-glow { text-shadow: 0 0 20px rgba(147, 51, 234, 0.5); }
+  .shadow-glass { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); }
+  .shadow-glow-amethyst { box-shadow: 0 0 20px rgba(147, 51, 234, 0.3); }
+
+  /* Fix: scrollbar-hide was used everywhere but never defined */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+  .line-clamp-1 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; }
+  .line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+
+  .skeleton {
+    background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }

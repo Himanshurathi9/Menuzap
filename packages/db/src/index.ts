@@ -1,25 +1,30 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-// We import the cafes schema we already created
 import * as cafesSchema from "./schema/cafes";
+import * as usersSchema from "./schema/users";
+import * as menuItemsSchema from "./schema/menu-items";
+import * as ordersSchema from "./schema/orders";
+import * as tablesSchema from "./schema/tables";
 
-// As we build out the rest of the schemas (users, menus, orders), 
-// we will add them to this master schema object.
 const schema = {
   ...cafesSchema,
+  ...usersSchema,
+  ...menuItemsSchema,
+  ...ordersSchema,
+  ...tablesSchema,
 };
 
-// We pull the database connection string from the environment variables.
-// Providing a fallback ensures the build process doesn't crash in CI/CD pipelines.
-const connectionString = process.env.DATABASE_URL || "postgres://postgres:postgres@localhost:5432/menumate";
+const connectionString =
+  process.env.DATABASE_URL || "postgres://postgres:postgres@localhost:5432/menumate";
 
-// Initialize the postgres client. 
-// prepare: false is highly recommended for serverless environments like Vercel.
 const client = postgres(connectionString, { prepare: false });
 
-// Export the active database instance to be used inside our Next.js API routes
 export const db = drizzle(client, { schema });
 
-// Export all schemas so the frontend can easily import types (e.g., type Cafe)
+// Re-export all types for use across the monorepo
 export * from "./schema/cafes";
+export * from "./schema/users";
+export * from "./schema/menu-items";
+export * from "./schema/orders";
+export * from "./schema/tables";

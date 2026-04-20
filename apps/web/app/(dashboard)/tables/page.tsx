@@ -1,6 +1,5 @@
 import React from "react";
 
-// Mock data for tables
 const mockTables = [
   { id: 1, name: "Table 1", status: "Occupied", activeOrders: 1 },
   { id: 2, name: "Table 2", status: "Empty", activeOrders: 0 },
@@ -13,40 +12,41 @@ const mockTables = [
 export default function TablesManagerPage() {
   return (
     <main className="min-h-screen p-6 lg:p-12">
-      {/* Header Section */}
       <header className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-vapor tracking-tight">
-            Table & QR Manager
-          </h1>
-          <p className="text-vapor-muted mt-1">
-            Manage your floor plan and print smart QR codes.
-          </p>
+          <h1 className="text-3xl font-extrabold text-vapor tracking-tight">Table & QR Manager</h1>
+          <p className="text-vapor-muted mt-1">Manage your floor plan and print smart QR codes.</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           <button className="bg-white/5 text-vapor border border-white/10 px-5 py-2.5 rounded-lg font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
             <DownloadIcon />
             <span>Download All QRs (PDF)</span>
           </button>
-          <button className="bg-amethyst text-white px-5 py-2.5 rounded-lg font-bold hover:bg-amethyst-600 transition-all shadow-glow-amethyst flex items-center">
-            <span>+ Add Table</span>
+          <button className="bg-amethyst text-white px-5 py-2.5 rounded-lg font-bold hover:bg-amethyst-600 transition-all shadow-glow-amethyst">
+            + Add Table
           </button>
         </div>
       </header>
 
-      {/* Stats Summary */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="glass-panel p-4 rounded-xl border border-white/5">
+        <div className="glass-panel p-4 rounded-xl">
           <p className="text-vapor-muted text-sm uppercase tracking-wider mb-1">Total Tables</p>
           <p className="text-2xl font-bold text-vapor">14</p>
         </div>
-        <div className="glass-panel p-4 rounded-xl border border-white/5">
+        <div className="glass-panel p-4 rounded-xl">
           <p className="text-vapor-muted text-sm uppercase tracking-wider mb-1">Occupied</p>
           <p className="text-2xl font-bold text-warning">2</p>
         </div>
+        <div className="glass-panel p-4 rounded-xl">
+          <p className="text-vapor-muted text-sm uppercase tracking-wider mb-1">Empty</p>
+          <p className="text-2xl font-bold text-success">12</p>
+        </div>
+        <div className="glass-panel p-4 rounded-xl">
+          <p className="text-vapor-muted text-sm uppercase tracking-wider mb-1">QRs Printed</p>
+          <p className="text-2xl font-bold text-vapor">14</p>
+        </div>
       </div>
 
-      {/* Tables Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {mockTables.map((table) => (
           <div
@@ -58,7 +58,7 @@ export default function TablesManagerPage() {
                 <h3 className="text-xl font-bold text-vapor">{table.name}</h3>
                 {table.status === "Occupied" ? (
                   <span className="inline-flex items-center gap-1.5 mt-1 text-xs font-medium text-warning bg-warning/10 px-2 py-0.5 rounded">
-                    <span className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse" />
                     {table.activeOrders} Active Order(s)
                   </span>
                 ) : (
@@ -67,9 +67,8 @@ export default function TablesManagerPage() {
                   </span>
                 )}
               </div>
-              
-              {/* Mock QR Code Graphic */}
-              <div className="w-12 h-12 bg-white rounded flex items-center justify-center p-1 border-2 border-white/10 opacity-80 group-hover:opacity-100 transition-opacity">
+              {/* Fix: was w-12 h-12 but QR SVG fills 100% — explicit sizing ensures correct render */}
+              <div className="w-12 h-12 bg-white rounded flex items-center justify-center p-1.5 border-2 border-white/10 opacity-80 group-hover:opacity-100 transition-opacity flex-shrink-0">
                 <QrGraphic />
               </div>
             </div>
@@ -89,18 +88,26 @@ export default function TablesManagerPage() {
   );
 }
 
-// Simple SVG for the Download Icon
+// Fix: was using viewBox="0 0 24 24" but rendering at w-18/h-18 — standardised to match
 function DownloadIcon() {
   return (
-    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-      <polyline points="7 10 12 15 17 10"></polyline>
-      <line x1="12" y1="15" x2="12" y2="3"></line>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
     </svg>
   );
 }
 
-// Abstract SVG representing a QR Code
 function QrGraphic() {
   return (
     <svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" className="text-black">

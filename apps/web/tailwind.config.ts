@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,7 +10,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Core System Mappings (This fixes the error!)
         background: "var(--background)",
         foreground: "var(--foreground)",
         border: "var(--border)",
@@ -23,8 +23,10 @@ const config: Config = {
           DEFAULT: "var(--popover)",
           foreground: "var(--popover-foreground)",
         },
-        
-        // Custom Palette: Modern Royal
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+        },
         obsidian: {
           DEFAULT: "#0A0A0E",
           light: "#121218",
@@ -36,37 +38,45 @@ const config: Config = {
         },
         amethyst: {
           400: "#C084FC",
-          DEFAULT: "#9333EA", 
+          DEFAULT: "#9333EA",
           600: "#7E22CE",
-          glow: "rgba(147, 51, 234, 0.4)", 
+          glow: "rgba(147, 51, 234, 0.4)",
         },
-        
-        // Status Colors
-        success: "#10B981", 
-        danger: "#EF4444",  
-        warning: "#F59E0B", 
+        success: "#10B981",
+        danger: "#EF4444",
+        warning: "#F59E0B",
       },
       backgroundImage: {
-        'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
-        'royal-gradient': 'linear-gradient(to right bottom, #0A0A0E, #121218, #1A1A24)',
+        "glass-gradient":
+          "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)",
+        "royal-gradient":
+          "linear-gradient(to right bottom, #0A0A0E, #121218, #1A1A24)",
       },
       boxShadow: {
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-        'glow-amethyst': '0 0 20px 0 rgba(147, 51, 234, 0.3)',
+        glass: "0 8px 32px 0 rgba(0,0,0,0.37)",
+        "glow-amethyst": "0 0 20px 0 rgba(147,51,234,0.3)",
+      },
+      borderRadius: {
+        DEFAULT: "var(--radius)",
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-out forwards',
-        'slide-up': 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        "fade-in": "fadeIn 0.5s ease-out forwards",
+        "slide-up": "slideUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards",
+        "pulse-slow": "pulse 3s cubic-bezier(0.4,0,0.6,1) infinite",
+        shimmer: "shimmer 1.5s infinite",
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
         slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
     },
