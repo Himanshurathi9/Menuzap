@@ -1,14 +1,37 @@
+
 {
-  "name": "menumate-monorepo",
-  "private": true,
-  "packageManager": "pnpm@9.1.0",
+  "name": "menumate-saas",
+  "version": "3.0.0",
+  "description": "Complete SaaS Platform for Restaurants - One Scan. Full Restaurant. They Can Never Leave.",
+  "main": "index.js",
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "lint": "turbo run lint"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.44.4",
+    "next": "14.2.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "typescript": "^5",
+    "@types/react": "^18",
+    "@types/node": "^20",
+    "zustand": "^4.5.2",
+    "lucide-react": "^0.395.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.3.0",
+    "qrcode.react": "^3.1.0",
+    "date-fns": "^3.6.0",
+    "sharp": "^0.33.4"
   },
   "devDependencies": {
-    "autoprefixer": "^10.5.0",
-    "turbo": "latest"
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4"
   }
 }
